@@ -28,5 +28,8 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('password/reset', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
-// 用户管理
+// 用户角色权限管理
 Route::resource('users', 'User\UserController');
+Route::resource('roles', 'User\RoleController');
+Route::resource('menus', 'User\MenuController');
+

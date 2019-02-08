@@ -3,19 +3,18 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Role;
+use App\Menu;
 
-class UserController extends Controller
+class RoleController extends Controller
 {
     /**
-     * 用户列表
+     * 菜单列表
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $users = User::orderBy('id','desc')->paginate(3);
-        return view('user.user.list', compact('users'));
+        $menus = Menu::orderBy('id','desc')->paginate(3);
+        return view('user.menu.list', compact('menus'));
     }
 }

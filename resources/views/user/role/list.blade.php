@@ -8,7 +8,7 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
                     <li class="active"><i class="icon-user"></i>用户权限管理</li>
-                    <li class="active">用户管理</li>
+                    <li class="active">角色管理</li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
@@ -17,7 +17,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        用户列表
+                        角色列表
                     </header>
                     <div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
                         <div class="row">
@@ -31,30 +31,41 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <div class="dataTables_filter" id="sample_1_filter">
                                     <label>Search: <input type="text" aria-controls="sample_1" class="form-control"></label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="dataTables_filter" id="sample_1_filter">
+                                    <a class="btn btn-primary" href="/roles/create">新增角色</a>
                                 </div>
                             </div>
                         </div>
                         <table class="table table-striped border-top dataTable">
                             <thead>
                             <tr role="row">
-                                <th>用户ID</th>
-                                <th>用户名</th>
-                                <th>邮箱</th>
+                                <th>角色ID</th>
+                                <th>名称</th>
+                                <th>状态</th>
                                 <th>创建时间</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody role="alert" aria-live="polite" aria-relevant="all">
-                            @if(!empty($users))
-                                @foreach($users as $user)
+                            @if(!empty($roles))
+                                @foreach($roles as $role)
                                     <tr>
-                                        <td><a href="/user/{{$user->id}}">{{$user->id}}</a></td>
-                                        <td>{{$user->name}}</td>
-                                        <td>{{$user->email}}</td>
-                                        <td>{{$user->created_at}}</td>
+                                        <td><a href="/role/{{$role->id}}">{{$role->id}}</a></td>
+                                        <td>{{$role->name}}</td>
+                                        <td>
+                                        @if($role->status == 1)
+                                            <span class="label label-success">可用</span>
+                                        @else
+                                            <span class="label label-danger">不可用</span>
+                                        @endif
+                                        </td>
+                                        <td>{{$role->created_at}}</td>
                                         <td>
                                             <button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
                                             <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
@@ -69,7 +80,7 @@
                             @endif
                             </tbody>
                         </table>
-                        {{$users->links()}}
+                        {{$roles->links()}}
                     </div>
                 </section>
             </div>
