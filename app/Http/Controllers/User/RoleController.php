@@ -30,7 +30,13 @@ class RoleController extends Controller
         return view('user.role.create');
     }
 
-    // 保存新增的角色信息
+    /**
+     * 保存新增的角色信息
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -40,6 +46,8 @@ class RoleController extends Controller
 
         $name = trim($request->input('name'));
         $status = intval($request->input('status'));
+        $comment = trim($request->input('comment'));
+
         // 检查角色名称是否已被使用
         if (Role::where('name', $name)->count() > 0) {
             return redirect('/roles/create')->withErrors(['角色名称已被使用'])->withInput();
@@ -48,6 +56,7 @@ class RoleController extends Controller
         $model = new Role();
         $model->name = $name;
         $model->status = $status;
+        $model->comment = $comment;
         if ($model->save()) {
             return redirect('/roles');
         } else {

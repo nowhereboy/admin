@@ -48,15 +48,16 @@
                                 <th>角色ID</th>
                                 <th>名称</th>
                                 <th>状态</th>
+                                <th>备注</th>
                                 <th>创建时间</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody role="alert" aria-live="polite" aria-relevant="all">
-                            @if(!empty($roles))
+                            @if(!is_null($roles) && $roles->count() > 0)
                                 @foreach($roles as $role)
                                     <tr>
-                                        <td><a href="/role/{{$role->id}}">{{$role->id}}</a></td>
+                                        <td><a href="/roles/{{$role->id}}">{{$role->id}}</a></td>
                                         <td>{{$role->name}}</td>
                                         <td>
                                         @if($role->status == 1)
@@ -65,6 +66,7 @@
                                             <span class="label label-danger">不可用</span>
                                         @endif
                                         </td>
+                                        <td>{{$role->comment}}</td>
                                         <td>{{$role->created_at}}</td>
                                         <td>
                                             <button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
@@ -75,7 +77,7 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="5" align="center">没有数据</td>
+                                    <td colspan="6" align="center">没有数据</td>
                                 </tr>
                             @endif
                             </tbody>

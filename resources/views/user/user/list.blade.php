@@ -48,10 +48,10 @@
                             </tr>
                             </thead>
                             <tbody role="alert" aria-live="polite" aria-relevant="all">
-                            @if(!empty($users))
+                            @if(!is_null($users) && $users->count() > 0)
                                 @foreach($users as $user)
                                     <tr>
-                                        <td><a href="/user/{{$user->id}}">{{$user->id}}</a></td>
+                                        <td><a href="/users/{{$user->id}}">{{$user->id}}</a></td>
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->created_at}}</td>
