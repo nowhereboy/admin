@@ -29,4 +29,4 @@ Route::get('password/reset', 'Auth\ResetPasswordController@showResetForm')->name
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
 // 用户管理
-Route::resource('users', 'System\UserController');
+Route::resource('users', 'User\UserController');
